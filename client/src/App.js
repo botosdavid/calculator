@@ -1,6 +1,7 @@
 import './App.css';
 import { useEffect } from 'react';
 import Calculator from './components/Calculator';
+import { CalculatorProvider } from './contexts/CalculatorContext';
 
 function App() {
   const getData = async () => {
@@ -15,7 +16,9 @@ function App() {
 
   return (
     <div className="App">
-      <Calculator />
+      <CalculatorProvider>
+        <Calculator />
+      </CalculatorProvider>
     </div>
   );
 }
