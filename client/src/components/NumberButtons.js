@@ -11,11 +11,11 @@ const NumberButtons = ({ numbers }) => {
                     <Button 
                         key={index}
                         text={index + 1} 
-                        onClick={() => dispatch({ type: 'value', payload: index + 1})}  />
+                        onClick={() => dispatch({ type: 'VALUE', payload: index + 1})}  />
                 )) 
             }
-            <Button text={0} onClick={() => dispatch({ type: 'value', payload: '0'})} width={'8rem'}/>
-            <Button text={'.'} onClick={() => dispatch({ type: 'value', payload: '.'})}/>
+            <Button text={0} onClick={() => dispatch({ type: 'VALUE', payload: '0'})} width={'8rem'}/>
+            <Button text={'.'} onClick={() => dispatch({ type: 'VALUE', payload: '.'})}/>
         </>
     )
 }

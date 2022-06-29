@@ -1,10 +1,11 @@
+const bodyParser = require('body-parser');
 const express = require('express');
 const cors = require('cors');  
 const fs = require('fs');
 const app = express();
 
-const port = process.env.PORT || 8000;
-
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cors());
 
 app.get('/', (req,res) => {
@@ -15,11 +16,13 @@ app.get('/', (req,res) => {
 })
 
 app.post('/', (req,res) => {
-    fs.writeFile("data.txt", "10", (err) => {
+    fs.writeFile("data.txt", req.body.message.toString(), (err) => {
         if(err) return console.log(err);
     });
 })
 
+const port = process.env.PORT || 8000;
+
 app.listen(port, () => {
-    console.log(`server running on port ${port}`);
+    console.log(`Server running on port ${port}`);
 })

@@ -10,7 +10,7 @@ const CalculatorProvider = ({ children }) => {
     };
     const reducer = (state, action) => {
         switch(action.type){
-            case 'value': 
+            case 'VALUE': 
                 return {
                     ...state, 
                     number: !endsWithOperator(state.number) 
@@ -18,20 +18,24 @@ const CalculatorProvider = ({ children }) => {
                     ? `${state.number}${action.payload}` 
                     : `${state.number} ${action.payload}`,
                 }
-            case 'equal': 
+            case 'EQUAL': 
                 return {
                     ...state, 
                     expression: `${state.number} =`,
                     number: eval(state.number)
                 }
-            case 'clear':
+            case 'CE':
                 return {
                     ...state, 
                     expression: '',
                     number: ''
                 }
-            case 'save': break;
-            case 'get' : break;
+            case 'GET': 
+                return {
+                    ...state, 
+                    expression: '',
+                    number: action.payload
+                }
             default: break;
         }
     }

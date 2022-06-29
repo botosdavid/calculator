@@ -11,13 +11,13 @@ const OperatorButtons = ({ operators }) => {
                         key={index}
                         text={operator} 
                         onClick={() => 
-                            dispatch({type: 'value', payload: operator})}  />
+                            dispatch({type: 'VALUE', payload: operator})}  />
                 )) 
             }
             <Button 
                 text={'='} 
                 onClick={() => 
-                    dispatch({type: 'equal' })}  />
+                    dispatch({type: 'EQUAL' })}  />
         </>
     )
 }
