@@ -7,13 +7,17 @@ const OperatorButtons = ({ operators }) => {
     return (
         <>
             { operators.map((operator, index) => (
-                            <Button 
-                                key={index}
-                                text={operator} 
-                                onClick={() => 
-                                    dispatch({type: 'operator', payload: operator})}  />
-                        )) 
-                    }
+                    <Button 
+                        key={index}
+                        text={operator} 
+                        onClick={() => 
+                            dispatch({type: 'value', payload: operator})}  />
+                )) 
+            }
+            <Button 
+                text={'='} 
+                onClick={() => 
+                    dispatch({type: 'equal' })}  />
         </>
     )
 }

@@ -1,25 +1,37 @@
 import { createContext, useContext, useReducer } from 'react';
+import { endsWithOperator } from '../utils/valueCheck';
 
 const CalculatorContext = createContext();
 
 const CalculatorProvider = ({ children }) => {
     const initialState = { 
-        number: "",
+        number: '',
         expression: '',
-        operator: null
     };
     const reducer = (state, action) => {
         switch(action.type){
-            case 'number': 
+            case 'value': 
                 return {
                     ...state, 
-                    number: state.number + action.payload 
+                    number: !endsWithOperator(state.number) 
+                    && !endsWithOperator(action.payload)
+                    ? `${state.number}${action.payload}` 
+                    : `${state.number} ${action.payload}`,
                 }
-            case 'operator': 
+            case 'equal': 
                 return {
                     ...state, 
-                    operator: action.payload
+                    expression: `${state.number} =`,
+                    number: eval(state.number)
                 }
+            case 'clear':
+                return {
+                    ...state, 
+                    expression: '',
+                    number: ''
+                }
+            case 'save': break;
+            case 'get' : break;
             default: break;
         }
     }
