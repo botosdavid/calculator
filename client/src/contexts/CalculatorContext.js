@@ -4,7 +4,8 @@ const CalculatorContext = createContext();
 
 const CalculatorProvider = ({ children }) => {
     const initialState = { 
-        number: 0,
+        number: "",
+        expression: '',
         operator: null
     };
     const reducer = (state, action) => {
@@ -12,7 +13,7 @@ const CalculatorProvider = ({ children }) => {
             case 'number': 
                 return {
                     ...state, 
-                    number: action.payload 
+                    number: state.number + action.payload 
                 }
             case 'operator': 
                 return {
