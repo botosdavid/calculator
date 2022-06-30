@@ -7,6 +7,7 @@ const getNumberApi = async () => {
 }             
 
 const saveNumberApi = async (number) => {
+    if(!number || number === '') return;
     const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

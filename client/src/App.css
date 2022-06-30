@@ -50,3 +50,11 @@
 .calculator-expression{
   color: grey;
 }
+
+.button:active{
+  background-color: rgb(54, 54, 54)
+}
+
+.operators-container .button:active{
+  background-color: rgb(238, 155, 0);
+}

@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
-import { endsWithOperator } from '../utils/valueCheck';
+import { endsWithOperator, isValidSyntaxZero } from '../utils/valueCheck';
 
 const CalculatorContext = createContext();
 
@@ -11,6 +11,18 @@ const CalculatorProvider = ({ children }) => {
     const reducer = (state, action) => {
         switch(action.type){
             case 'VALUE': 
+                if(!isValidSyntaxZero(state.number, action.payload)) 
+                    return state;
+                if(state.number === '' &&
+                    (action.payload === '*' 
+                    || action.payload === '/'))
+                    return state;
+                if(endsWithOperator(state.number)
+                    && endsWithOperator(action.payload))
+                    return state;
+                if(state.number.slice(-1) === '.' 
+                    && action.payload === '.') 
+                    return state;
                 return {
                     ...state, 
                     number: !endsWithOperator(state.number) 
@@ -19,10 +31,17 @@ const CalculatorProvider = ({ children }) => {
                     : `${state.number} ${action.payload}`,
                 }
             case 'EQUAL': 
-                return {
-                    ...state, 
-                    expression: `${state.number} =`,
-                    number: eval(state.number)
+                if( endsWithOperator(state.number)
+                    || state.number === '') 
+                    return state;
+                try{
+                    return {
+                        ...state, 
+                        expression: `${state.number} =`,
+                        number: eval(state.number)
+                    }
+                }catch { 
+                    return state; 
                 }
             case 'CE':
                 return {

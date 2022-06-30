@@ -1,6 +1,6 @@
 import Button from './Button';
 import useCalculator from '../contexts/CalculatorContext';
-import { getNumberApi, saveNumberApi } from '../utils/getNumberApi';
+import { getNumberApi, saveNumberApi } from '../utils/fetchNumberApi';
 
 const TaskButtons = ({ tasks }) => {
     const [ state, dispatch ] = useCalculator();
@@ -12,18 +12,22 @@ const TaskButtons = ({ tasks }) => {
 
     const executeTask = (task) => {
         switch(task){
-            case 'CE': dispatch({ type: task }); break;
             case 'GET': getNumberFromApi(); break;
+            case 'CE': dispatch({ type: task }); break;
             case 'SAVE': saveNumberApi(state.number); break;
             default: break;
         }
     }
-   
+
     return (
         <>
             {   
                 tasks.map((task, index) => (
-                    <Button text={task} onClick={() => executeTask(task)} key={index} />
+                    <Button 
+                        key={index}
+                        text={task} 
+                        onClick={() => executeTask(task)}  
+                    />
                 )) 
             }
         </>
