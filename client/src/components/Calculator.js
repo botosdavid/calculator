@@ -10,8 +10,8 @@ const Calculator = () => {
     return (
         <div className="calculator-container">
             <div className="calculator-screen">
-                <h3 className="calculator-expression">{state.expression=='' ? '( )' : state.expression}</h3>
-                <h1 className="calculator-number">{state.number=='' ? '0': state.number}</h1>
+                <h3 className="calculator-expression">{state.expression}</h3>
+                <h1 className="calculator-number">{state.number}</h1>
             </div>
             <div className="buttons-container">
                 <div className="numbers-container">

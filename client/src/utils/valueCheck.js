@@ -7,7 +7,8 @@ const endsWithOperator = (expression) => {
 }
 
 const isValidSyntaxZero = (expression, value) => {
-    if(expression === '0') return false;
+    if(expression === '0' && value !== '.') return false;
+    
     const stringExpression = expression.toString();
     const lastCharacterOfExpression = stringExpression.slice(-1);
     const secondLastCharecterOfExpression = stringExpression.slice(-2)[0];
@@ -18,4 +19,10 @@ const isValidSyntaxZero = (expression, value) => {
     return true;
 }
 
-export { endsWithOperator, isValidSyntaxZero };
+const hasLastNumberDot = (numberExpression) => {
+    const numberArray = numberExpression.toString().split(" ");
+    const lastNumber = numberArray.slice(-1)[0];
+    return lastNumber.includes('.');
+}
+
+export { endsWithOperator, isValidSyntaxZero, hasLastNumberDot };
