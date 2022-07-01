@@ -6,23 +6,20 @@ const endsWithOperator = (expression) => {
     return operators.includes(lastCharacterOfExpression);
 }
 
-const isValidSyntaxZero = (expression, value) => {
-    if(expression === '0' && value !== '.') return false;
-    
-    const stringExpression = expression.toString();
-    const lastCharacterOfExpression = stringExpression.slice(-1);
-    const secondLastCharecterOfExpression = stringExpression.slice(-2)[0];
-    if( lastCharacterOfExpression === '0' 
-        && secondLastCharecterOfExpression === ' ' 
-        && !endsWithOperator(value))
-        return false;
-    return true;
-}
-
 const hasLastNumberDot = (numberExpression) => {
     const numberArray = numberExpression.toString().split(" ");
     const lastNumber = numberArray.slice(-1)[0];
     return lastNumber.includes('.');
 }
 
-export { endsWithOperator, isValidSyntaxZero, hasLastNumberDot };
+const isLastNumberZero = (numberExpression) => {
+    if(numberExpression === '0') return true;
+    const lastCharacter = numberExpression.toString().slice(-1);
+    const secondLastCharacter = numberExpression.toString().slice(-2)[0];
+    if( secondLastCharacter === ' ' 
+        && lastCharacter === '0') 
+        return true;
+    return false;
+}
+
+export { endsWithOperator, hasLastNumberDot, isLastNumberZero };

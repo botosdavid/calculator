@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
-import { endsWithOperator, isValidSyntaxZero, hasLastNumberDot } from '../utils/valueCheck';
+import { endsWithOperator, hasLastNumberDot, isLastNumberZero } from '../utils/valueCheck';
 
 const CalculatorContext = createContext();
 
@@ -15,16 +15,11 @@ const CalculatorProvider = ({ children }) => {
                     && endsWithOperator(action.payload))
                     return state;
                 if( hasLastNumberDot(state.number) 
-                    && action.payload==='.') 
+                    && action.payload === '.') 
                     return state;
-                if(state.number === '0') 
-                    return {
-                        ...state,
-                        number: action.payload
-                    }
-                if(state.number.toString().slice(-1) === '0' 
-                    && (state.number.toString().slice(-2)[0] === ' ') 
-                    && !endsWithOperator(action.payload) && action.payload !== '.')
+                if( isLastNumberZero(state.number)  
+                    && !endsWithOperator(action.payload) 
+                    && action.payload !== '.')
                     return {
                         ...state,
                         number: state.number.slice(0,-1) + action.payload
@@ -48,18 +43,14 @@ const CalculatorProvider = ({ children }) => {
                 }catch { 
                     return state; 
                 }
-            case 'CE':
-                return {
-                    ...state, 
-                    expression: '( )',
-                    number: '0'
-                }
             case 'GET': 
                 return {
                     ...state, 
                     expression: '( )',
                     number: action.payload
                 }
+            case 'CE':
+                return initialState;
             default: break;
         }
     }

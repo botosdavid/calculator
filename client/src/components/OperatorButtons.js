@@ -10,14 +10,14 @@ const OperatorButtons = ({ operators }) => {
                     <Button 
                         key={index}
                         text={operator} 
-                        onClick={() => 
-                            dispatch({type: 'VALUE', payload: operator})}  />
+                        onClick={() => dispatch({type: 'VALUE', payload: operator})}  
+                    />
                 )) 
             }
             <Button 
                 text={'='} 
-                onClick={() => 
-                    dispatch({type: 'EQUAL' })}  />
+                onClick={() => dispatch({type: 'EQUAL' })}  
+            />
         </>
     )
 }
